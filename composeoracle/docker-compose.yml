@@ -1,0 +1,9 @@
+Oracle:
+  image: oracle/database:12.1.0.2-ee
+  ports:
+    - 1521:1521
+    - 5500:5500
+  environment:
+    - username = system
+    - password = password
+    - sid=ORCLPDB

@@ -1,0 +1,31 @@
+Oracle:
+  image: oracle/database:latest
+  registry_id: ???
+  host: host2 ??
+  mem_min: 400m
+  ports:
+    - 1521:1521
+    - 5500:5500
+  environment:
+    - username = system
+    - password = password
+    - sid=ORCLPDB
+
+
+
+https://github.com/sysco-middleware/docker-image-oracle-database-instance/blob/master/Dockerfile
+    FROM tmp-oracle-database-instance
+
+    MAINTAINER Jorge Quilcate <jorge.quilcate@sysco.no>
+
+    USER oracle
+
+    ENV ORACLE_HOME /home/oracle/product/oracle_home
+    ENV ORACLE_SID orcl
+
+    WORKDIR $ORACLE_HOME
+
+    ADD files/listener.ora.tmpl network/admin/listener.ora.tmpl
+    ADD files/startup.sh .
+
+    CMD sh startup.sh && tail -f startup.log
